@@ -1,3 +1,5 @@
+import type { JSX } from "react";
+
 export interface BlogPost {
     id: number;
     slug: string;
@@ -9,4 +11,8 @@ export interface BlogPost {
     isAuthenticated: boolean;
     login: () => void;
     logout: () => void;
+  }
+
+  export interface ProtectedRouteProps {
+    children: JSX.Element;
   }
