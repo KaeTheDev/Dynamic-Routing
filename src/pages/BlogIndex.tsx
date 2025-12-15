@@ -7,7 +7,7 @@ const BlogIndex = () => {
       <h1>Blog</h1>
       <ul>
         {posts.map((post) => (
-          <li key={post.id}>
+          <li className="text-black hover:text-red-600" key={post.id}>
             <Link to={`/blog/${post.slug}`}>{post.title}</Link>
           </li>
         ))}
