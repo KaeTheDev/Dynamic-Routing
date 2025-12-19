@@ -1,73 +1,135 @@
-# React + TypeScript + Vite
+# React Lab – Dynamic Blog with Protected Routes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##  Overview
+This lab focuses on building a small but feature-rich blog application using React Router. The project emphasizes dynamic routing, route parameters, basic client-side authentication, and protected routes—core concepts used in modern single-page applications.
 
-Currently, two official plugins are available:
+##  Workplace Context
+In real-world applications, developers frequently need to generate pages dynamically from data and restrict access to certain areas based on authentication status. This lab simulates a common production scenario: a public-facing blog with an admin dashboard accessible only to logged-in users.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##  Learning Objectives
+Upon successful completion of this lab, you will be able to:
 
-## React Compiler
+* Implement dynamic routes using React Router.
+* Create an index page that links to dynamically generated detail pages.
+* Read and use URL parameters (slugs or IDs) to fetch and display data.
+* Structure a basic authentication system using React Context.
+* Create protected routes that redirect unauthenticated users.
+* Conditionally render UI based on authentication state.
+* (Bonus) Implement simple animated page transitions.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+##  Description
 
-## Expanding the ESLint configuration
+This lab focuses on:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* Creating a blog index page that lists all posts.
+* Implementing dynamic routes for individual blog posts.
+* Managing authentication state using React Context.
+* Protecting routes from unauthorized access.
+* Conditionally rendering navigation elements based on login state.
+* (Bonus) Adding animated transitions between pages.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Mock Blog Data
+* Blog posts are stored in an in-memory array (e.g., `lib/posts.ts`).
+* Each post includes:
+  * `id`
+  * `slug`
+  * `title`
+  * `content`
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Public Blog Pages
+**Blog Index Page (`/blog`):**
+* Displays a list of all blog posts.
+* Each post links to its dynamic route using its slug.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Dynamic Blog Post Page (`/blog/:slug`):**
+* Uses the slug from the URL to fetch and display a specific post.
+* Displays a “Post not found” message if no matching post exists.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Authentication System (AuthContext)
+**Auth Context provides:**
+* `isAuthenticated` — boolean login state
+* `login()` — simulates logging in
+* `logout()` — simulates logging out
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Login Page (`/login`):**
+* Simple page with a “Log In” button.
+
+**Navbar/Header:**
+* Shows “Log In” when logged out.
+* Shows “Log Out” and “Admin” link when logged in.
+
+No real authentication is required—state is managed entirely with Context.
+
+---
+
+### Protected Admin Route
+**Admin Page (`/admin`):**
+* Accessible only to authenticated users.
+* Unauthenticated users are redirected to `/login`.
+* Displays a simple dashboard message.
+
+---
+
+### (Bonus) Page Transitions
+* Optional animated transitions between pages.
+* Libraries such as `framer-motion` and `AnimatePresence` can be used to implement fade-in/fade-out effects.
+
+---
+
+##  Resources
+
+*  React Docs — https://react.dev
+*  TypeScript Handbook — https://www.typescriptlang.org/docs
+*  React Hooks Guide — Official Documentation
+*  TypeScript + React Cheatsheets (recommended)
+
+
+##  Getting Started
+
+##  Requirements
+
+*  Node.js v24+
+*  npm
+*  Git
+*  A code editor (VS Code recommended)
+*  TypeScript
+*  React
+
+##  OS Compatibility
+
+This lab works on:
+
+*  Windows
+*  macOS
+*  Linux
+
+##  Installation
+
+1. Clone the repository:
+
+git clone [<repository-url>](https://github.com/KaeTheDev/Dynamic-Routing.git)
+
+2. Navigate into the project folder:
+
+cd dynamic-routing
+
+##  Setup
+
+1. Install dependencies:
+
+npm install
+
+2. Run the project:
+
+npm run dev
+
+##  Project Structure
+
+* components/ — Reusable UI components (Navbar, ProtectedRoute, etc.).
+* pages/ — Page-level components (Blog, Post, Login, Admin).
+* contexts/ — Authentication context and provider.
+* lib/ — Mock blog data.
+* types/ — Shared TypeScript interfaces.
+* utils/ — Helper utilities.
